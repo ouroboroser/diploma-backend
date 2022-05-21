@@ -1,0 +1,1 @@
+require('./handleData.js')(require('rxjs'));
