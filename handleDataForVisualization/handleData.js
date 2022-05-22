@@ -26,11 +26,14 @@ module.exports = Rx => {
     }});
 
     Object.defineProperty(Rx.RxFetch, 'fromFetch', { get: () => (...args) => {
-        console.log('BLYA', ...args);
+        const result = origFromFetch('https://jsonplaceholder.typicode.com/todos/1');
+        
         operations.push({
             operations: 'from_fetch_url',
             args: args[0].toString(),
         });
+
+        console.log('SYKE', result);
         return origFromFetch(...args);
     }});
 
