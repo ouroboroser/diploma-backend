@@ -1,4 +1,5 @@
 const fs = require('fs');
+//const r = require('./result')
 
 module.exports = Rx => {
     console.log('PING 1', Rx.Rx.of);
@@ -10,7 +11,7 @@ module.exports = Rx => {
     Object.defineProperty(Rx.Rx, 'of', { get: () => (...args) => {
         //console.log('creating range with args', args);
         operations.push({
-            operations: 'of_created',
+            operation: 'of_created',
             args: args,
         });
         return origOf(...args);
@@ -19,21 +20,20 @@ module.exports = Rx => {
     Object.defineProperty(Rx.Rx, 'range', { get: () => (...args) => {
         console.log('creating range with args', args);
         operations.push({
-            operations: 'range_created',
+            operation: 'range_created',
             args: args,
         });
         return origRange(...args);
     }});
 
     Object.defineProperty(Rx.RxFetch, 'fromFetch', { get: () => (...args) => {
-        const result = origFromFetch('https://jsonplaceholder.typicode.com/todos/1');
-        
+        const fetch = origFromFetch(...args);
+
         operations.push({
-            operations: 'from_fetch_url',
+            operation: 'from_fetch_url',
             args: args[0].toString(),
         });
 
-        console.log('SYKE', result);
         return origFromFetch(...args);
     }});
 
@@ -44,6 +44,7 @@ module.exports = Rx => {
 
         return input => {
             const loggerBefore = input.pipe(origMap(t => {
+                console.log('T:', t);
                 operations.push({
                     operation: 'filter_input',
                     filter: args[0].toString(),
@@ -102,6 +103,6 @@ module.exports = Rx => {
     }});
 
     Rx.Rx.saveDiagram = () => {
-        fs.writeFileSync('diagram.json', JSON.stringify(operations, null, 2), console.error);
+        fs.writeFileSync('../backend/handleDataForVisualization/result/diagram.json', JSON.stringify(operations, null, 2), console.error);
     };
 };

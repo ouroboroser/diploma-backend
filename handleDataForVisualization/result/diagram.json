@@ -1,0 +1,134 @@
+[
+  {
+    "operation": "range_created",
+    "args": [
+      1,
+      10
+    ]
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 1
+  },
+  {
+    "operation": "filter_output",
+    "filter": "x => x % 2 === 1",
+    "arg": 1
+  },
+  {
+    "operation": "map_input",
+    "map": "x => x + x",
+    "arg": 1
+  },
+  {
+    "operation": "map_output",
+    "map": "x => x + x",
+    "arg": 2
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 2
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 3
+  },
+  {
+    "operation": "filter_output",
+    "filter": "x => x % 2 === 1",
+    "arg": 3
+  },
+  {
+    "operation": "map_input",
+    "map": "x => x + x",
+    "arg": 3
+  },
+  {
+    "operation": "map_output",
+    "map": "x => x + x",
+    "arg": 6
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 4
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 5
+  },
+  {
+    "operation": "filter_output",
+    "filter": "x => x % 2 === 1",
+    "arg": 5
+  },
+  {
+    "operation": "map_input",
+    "map": "x => x + x",
+    "arg": 5
+  },
+  {
+    "operation": "map_output",
+    "map": "x => x + x",
+    "arg": 10
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 6
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 7
+  },
+  {
+    "operation": "filter_output",
+    "filter": "x => x % 2 === 1",
+    "arg": 7
+  },
+  {
+    "operation": "map_input",
+    "map": "x => x + x",
+    "arg": 7
+  },
+  {
+    "operation": "map_output",
+    "map": "x => x + x",
+    "arg": 14
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 8
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 9
+  },
+  {
+    "operation": "filter_output",
+    "filter": "x => x % 2 === 1",
+    "arg": 9
+  },
+  {
+    "operation": "map_input",
+    "map": "x => x + x",
+    "arg": 9
+  },
+  {
+    "operation": "map_output",
+    "map": "x => x + x",
+    "arg": 18
+  },
+  {
+    "operation": "filter_input",
+    "filter": "x => x % 2 === 1",
+    "arg": 10
+  }
+]
