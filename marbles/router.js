@@ -3,6 +3,6 @@ const marblesController = require('./controller');
 
 const marblesRouter = new Router({ prefix: '/marbles' });
 
-marblesRouter.get('/', marblesController.getData);
+marblesRouter.post('/', marblesController.getData);
 
 module.exports = marblesRouter;
