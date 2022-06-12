@@ -4,7 +4,7 @@ const { sendDataToS3 } = require('../handleDataForVisualization/sendDataToS3');
 
 const getData = async (ctx) => {
     const data = fs.readFileSync('/home/evgeniia/study/rxVisualizer/backend/handleDataForVisualization/result/diagram.json', 'utf8');
-    await sendDataToS3();
+    // await sendDataToS3();
     ctx.body = JSON.parse(data);
 };
 
