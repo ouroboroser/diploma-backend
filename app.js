@@ -1,6 +1,7 @@
 require('dotenv').config();
 const Koa = require('koa');
 const Router = require('koa-router');
+const bodyParser = require('koa-body');
 const cors = require('@koa/cors');
 
 const app = new Koa();
@@ -13,6 +14,7 @@ router.get('/', async (ctx) => {
 });
 
 app.use(cors());
+app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
 
 app.use(marblesRouter.routes());

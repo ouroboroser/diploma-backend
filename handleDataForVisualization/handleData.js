@@ -1,15 +1,12 @@
 const fs = require('fs');
-//const r = require('./result')
 
 module.exports = Rx => {
-    console.log('PING 1', Rx.Rx.of);
     const origOf = Rx.Rx.of;
     const origRange = Rx.Rx.range;
     const origFromFetch = Rx.RxFetch.fromFetch;
     const operations = [];
 
     Object.defineProperty(Rx.Rx, 'of', { get: () => (...args) => {
-        //console.log('creating range with args', args);
         operations.push({
             operation: 'of_created',
             args: args,
@@ -18,7 +15,6 @@ module.exports = Rx => {
     }});
 
     Object.defineProperty(Rx.Rx, 'range', { get: () => (...args) => {
-        console.log('creating range with args', args);
         operations.push({
             operation: 'range_created',
             args: args,
@@ -39,18 +35,16 @@ module.exports = Rx => {
 
     const origFilter = Rx.Rx.filter;
     Object.defineProperty(Rx.Rx, 'filter', { get: () => (...args) => {
-        console.log('creating filter with', args[0].toString());
+        // console.log('creating filter with', args[0].toString());
         const filter = origFilter(...args);
 
         return input => {
             const loggerBefore = input.pipe(origMap(t => {
-                console.log('T:', t);
                 operations.push({
                     operation: 'filter_input',
                     filter: args[0].toString(),
                     arg: t,
                 });
-                //console.log('filter input is ', t);
                 return t;
             }));
 
@@ -62,7 +56,6 @@ module.exports = Rx => {
                     filter: args[0].toString(),
                     arg: t,
                 });
-                //console.log('filter output is', t);
                 return t;
             }));
 
@@ -72,12 +65,11 @@ module.exports = Rx => {
 
     const origMap = Rx.Rx.map;
     Object.defineProperty(Rx.Rx, 'map', { get: () => (...args) => {
-        console.log('creating map with', args[0].toString());
+        // console.log('creating map with', args[0].toString());
         const map = origMap(...args);
 
         return input => {
             const loggerBefore = input.pipe(origMap(t => {
-                //console.log('map input is', t);
                 operations.push({
                     operation: 'map_input',
                     map: args[0].toString(),
@@ -89,7 +81,6 @@ module.exports = Rx => {
             const mapApplied = map(loggerBefore);
 
             const loggerAfter = mapApplied.pipe(origMap(t => {
-                //console.log('map output is', t);
                 operations.push({
                     operation: 'map_output',
                     map: args[0].toString(),
@@ -102,7 +93,7 @@ module.exports = Rx => {
         };
     }});
 
-    Rx.Rx.saveDiagram = () => {
+    Rx.Rx.explore = (apiKey) => {
         fs.writeFileSync('../backend/handleDataForVisualization/result/diagram.json', JSON.stringify(operations, null, 2), console.error);
     };
 };
